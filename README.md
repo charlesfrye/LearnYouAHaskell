@@ -1,2 +1,2 @@
 # LearnYouAHaskell
-Learning to Use Haskell with Miran Lipovaca's Book
+Learning to Use Haskell w Miran Lipovaca's Book
