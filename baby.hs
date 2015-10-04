@@ -6,5 +6,7 @@ doubleSmallNumber x = if x > 100
 			else doubleMe x
 boomBang xs = [ if x `mod` 7 == 4 then "BOOM" else "tick.." | x<- xs, odd x] 
 length' xs = sum [1 | _ <- xs]
+removeNonUppercase :: [Char] -> [Char]
 removeNonUppercase st = [ c | c <- st, c `elem`['A'..'Z']]
+
 
