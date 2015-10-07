@@ -54,3 +54,26 @@ max' :: (Ord a) => a -> a -> a
 max' a b
 	| a > b = a
 	| True  = b
+
+bmiTell :: (RealFloat a) => a -> a -> String
+bmiTell weight height
+	| bmi <= 18.5 = "underweight"
+	| bmi <= 25.0 = "healthy weight"
+	| bmi <= 30.0 = "overweight"
+	| True = "obese"
+	where bmi = weight / height ^ 2
+	      (under, healthy, over) = (18.5, 25.0, 30.0)
+
+calcBmis :: (RealFloat a) => [(a,a)] -> [a]
+calcBmis lst = [bmi w h | (w,h) <- lst]
+	where bmi weight height = weight/ height ^ 2
+
+calcBmis' :: (RealFloat a) => [(a,a)] -> [a]
+calcBmis' lst = [w / h^2 | (w,h) <- lst]
+--	where bmi weight height = weight/ height ^ 2
+
+cylinder :: (RealFloat a) => a -> a -> a
+cylinder r h =
+	let sideArea = 2 * pi * r * h
+	    topArea = pi * r ^2
+	in sideArea + 2 * topArea
