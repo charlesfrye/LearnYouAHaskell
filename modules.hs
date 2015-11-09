@@ -1,5 +1,6 @@
 import Data.List
 import Data.Char
+import qualified Data.Map as Map
 
 numUniques :: (Eq a) => [a] -> Int
 numUniques = length . nub
@@ -38,3 +39,8 @@ findKey' key ((k,v):xs) = if key == k
 				else findKey' key xs
 
 findKey'' key = foldl (\acc (k,v) -> if key == k then Just v else acc) Nothing
+
+fromList' :: (Ord k) => [(k,v)] -> Map.Map k v
+fromList' = foldr (\(k,v) acc -> Map.insert k v acc) Map.empty
+
+
