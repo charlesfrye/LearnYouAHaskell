@@ -8,7 +8,7 @@ maximum' (x:xs)
 
 maximum'' [] = error "maximum of empty list"
 maximum'' [x] = x
-maximum'' (x:xs) = max x (maximum' xs)
+maximum'' (x:xs) = max x (maximum'' xs)
 
 replicate' :: (Num i, Ord i) => i -> a -> [a]
 replicate' n x
