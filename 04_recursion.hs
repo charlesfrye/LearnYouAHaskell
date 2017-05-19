@@ -15,11 +15,25 @@ replicate' n x
     | n <= 0    = []
     | otherwise = x:replicate' (n-1) x
 
+replicate'' :: (Integral i) => i -> a -> [a]
+replicate'' n x
+    | n <= 0    = []
+    | otherwise = x:replicate'' (n-1) x
+
 take' :: (Num i, Ord i) => i -> [a] -> [a]
 take' n _
     | n <= 0   = []
 take' _ []     = []
 take' n (x:xs) = x: take' (n-1) xs
+
+take'' :: (Integral i) => i -> [a] -> [a]
+take'' n _
+    | n <= 0   = []
+take'' _ []     = []
+take'' n (x:xs) = x: take'' (n-1) xs
+
+replicate''' :: (Integral i) => i -> a -> [a]
+replicate''' n x = take'' n $ repeat' x
 
 reverse' :: [a] -> [a]
 reverse' [] = []
@@ -45,4 +59,3 @@ quicksort (x:xs) =
     let smallerSorted = quicksort [a | a <- xs, a <= x]
         biggerSorted  = quicksort [a | a <- xs, a > x]
     in smallerSorted ++ [x] ++ biggerSorted
-
