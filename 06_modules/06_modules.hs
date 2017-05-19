@@ -9,7 +9,7 @@ search :: (Eq a) => [a] -> [a] -> Bool
 search needle haystack =
     let nlen = length needle
     in foldl (\acc x ->
-    	if take nlen x == needle then True else acc) False (tails haystack)
+        if take nlen x == needle then True else acc) False (tails haystack)
 
 on' :: (b -> b -> c) -> (a->b) -> a -> a -> c
 f `on'` g = \x y -> f (g x) (g y)
@@ -35,8 +35,8 @@ findKey key xs = snd . head . filter (\(k,v) -> key == k) $ xs
 findKey' :: (Eq k) => k -> [(k,v)] -> Maybe v
 findKey' key [] = Nothing
 findKey' key ((k,v):xs) = if key == k
-				then Just v
-				else findKey' key xs
+                then Just v
+                else findKey' key xs
 
 findKey'' key = foldl (\acc (k,v) -> if key == k then Just v else acc) Nothing
 
