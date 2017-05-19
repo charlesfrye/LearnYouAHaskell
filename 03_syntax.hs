@@ -6,7 +6,7 @@ sayMe :: (Integral a) => a -> String
 sayMe 1 = "One!"
 sayMe 2 = "Two!"
 sayMe 3 = "Three!"
-sayMe x = "Must be between 1 and 5"
+sayMe x = "Must be between 1 and 3"
 
 factorial :: (Integral a) => a ->a
 factorial 0 = 1
@@ -42,38 +42,57 @@ sum' (head:tail) = head + sum' tail
 
 capital :: String -> String
 capital "" = "Empty string, whoops!"
-capital all@(first:_) = "The first letter of " ++ all ++ " is " ++ [first] 
+capital all@(first:_) = "The first letter of " ++ all ++ " is " ++ [first]
 
 guardTell :: (RealFloat a) => a -> String
 guardTell val
-	| val < 0  = "Number is negative."
-	| val > 0  = "Number is positive."
-	| otherwise = "Number is 0."
+    | val < 0  = "Number is negative."
+    | val > 0  = "Number is positive."
+--  | otherwise = "Number is 0."
+guardTell 0 = "Number is 0."
 
 max' :: (Ord a) => a -> a -> a
 max' a b
-	| a > b = a
-	| True  = b
+    | a > b = a
+    | True  = b
+
+max'' :: (Ord a) => a -> a -> a
+max'' a b | a > b = a | otherwise = b
 
 bmiTell :: (RealFloat a) => a -> a -> String
 bmiTell weight height
-	| bmi <= 18.5 = "underweight"
-	| bmi <= 25.0 = "healthy weight"
-	| bmi <= 30.0 = "overweight"
-	| True = "obese"
-	where bmi = weight / height ^ 2
-	      (under, healthy, over) = (18.5, 25.0, 30.0)
+    | bmi <= under = "underweight"
+    | bmi <= healthy = "healthy weight"
+    | bmi <= over = "overweight"
+    | otherwise = "obese"
+    where bmi = weight / height ^ 2
+          (under, healthy, over) = (18.5, 25.0, 30.0)
 
 calcBmis :: (RealFloat a) => [(a,a)] -> [a]
 calcBmis lst = [bmi w h | (w,h) <- lst]
-	where bmi weight height = weight/ height ^ 2
+    where bmi weight height = weight/ height ^ 2
 
 calcBmis' :: (RealFloat a) => [(a,a)] -> [a]
 calcBmis' lst = [w / h^2 | (w,h) <- lst]
---	where bmi weight height = weight/ height ^ 2
+--  where bmi weight height = weight/ height ^ 2
 
-cylinder :: (RealFloat a) => a -> a -> a
-cylinder r h =
-	let sideArea = 2 * pi * r * h
-	    topArea = pi * r ^2
-	in sideArea + 2 * topArea
+calcBmis'' :: (RealFloat a) => [(a,a)] -> [a]
+calcBmis'' xs = [bmi | (w,h) <- xs, let bmi = w / h ^ 2]
+
+--calcBmisOver :: (RealFloat a) => [(a,a)] -> [a]
+--calcBmisOver xs = [bmi | (w,h) <- xs, let bmi = w / h ^ 2, bmi >= 25.0]
+
+--cylinder :: (RealFloat a) => a -> a -> a
+--cylinder r h =
+--  let sideArea = 2 * pi * r * h
+--      topArea = pi * r ^2
+--  in sideArea + 2 * topArea
+
+head'' :: [a] -> a
+head'' xs = case xs of [] -> error "No head for empty lists!"
+                       (x:_) -> x
+
+describeList :: [a] -> String
+describeList xs = "The list is " ++ case xs of [] -> "empty."
+                                               [x] -> "a singleton list"
+                                               xs -> "a longer list"
