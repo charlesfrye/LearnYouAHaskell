@@ -13,7 +13,7 @@ lockerLookup lockerNumber map =
             " doesn't exist!"
         Just (state, code) -> if state /= Taken
                     then Right code
-                    else Left $ 
+                    else Left $
                 "Locker " ++ show lockerNumber ++
                 " is already taken!"
 
