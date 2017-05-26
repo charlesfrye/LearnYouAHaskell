@@ -19,11 +19,18 @@ main' = do line <- getLine
 --instance Functor ((->) r) where
 --  fmap f g = (\x -> (f (g x)))
 
-class (Functor f) => Applicative' f where
-    pure :: a -> f a
-    (<*>) :: f (a -> b) -> f a -> f b
+--class (Functor f) => Applicative' f where
+--    pure :: a -> f a
+--    (<*>) :: f (a -> b) -> f a -> f b
 
-instance Applicative' Maybe where
-    pure = Just
-    Nothing <*> _ = Nothing
-    (Just f) <*> something = fmap f something
+--instance Applicative' Maybe where
+--    pure = Just
+--    Nothing <*> _ = Nothing
+--    (Just f) <*> something = fmap f something
+
+myAction :: IO String
+myAction = (++) <$> getLine <*> getLine
+
+takeTwoPrint = do
+        a <- myAction
+        putStrLn $ "The two lines concatenated turn out to be: " ++ a
